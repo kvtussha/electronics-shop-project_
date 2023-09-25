@@ -1,13 +1,27 @@
+import csv
+
+
 class Item:
     pay_rate = 0
     all = []
 
     def __init__(self, name, price, quantity):
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
 
         Item.all.append(self)
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, new_name):
+        if len(new_name > 10):
+            self.__name = new_name[:10]
+        else:
+            self.__name = new_name
 
     def calculate_total_price(self) -> [int, float]:
         """
@@ -23,3 +37,36 @@ class Item:
         """
         self.price = round(self.price * Item.pay_rate)
         return self.price
+
+    # @classmethod
+    # def instantiate_from_csv(cls):
+    #     l = []
+    #     with open('items.csv', encoding='utf-8') as f:
+    #         dict_reader = csv.DictReader(f)
+    #         for row in dict_reader:
+    #             name, price, quantity = row['name'], row['price'], row['quantity']
+    #             cls.__new__(object)
+    #     # return cls(name, price, quantity)
+    #     return cls.__new__(object)
+
+    @classmethod
+    def instantiate_from_csv(cls, *args, **kwargs):
+        l = []
+
+        with open('items.csv', encoding='utf-8') as f:
+            dict_reader = csv.DictReader(f)
+            for row in dict_reader:
+                instance = object.__new__(cls, *args, **row)
+                l.append(instance)
+            return l
+
+
+    @staticmethod
+    def string_to_number(num):
+        """
+        Метод преобразовывает число в виде строки в число
+        :return: преобразованное число
+        """
+        return int(num)
+
+print(Item.instantiate_from_csv())
