@@ -36,3 +36,5 @@ def string_to_number_test():
 
 total_price_test()
 apply_discount_test()
+instantiate_from_csv_test()
+string_to_number_test()
