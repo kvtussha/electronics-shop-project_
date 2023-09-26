@@ -1,3 +1,5 @@
+import inspect
+
 from src.item import Item
 
 
@@ -21,6 +23,15 @@ def apply_discount_test():
     assert tv.apply_discount() == 12420, "Функция apply_discount работает неправильно"
     assert phone.apply_discount() == 7830, "Функция apply_discount работает неправильно"
     assert laptop.apply_discount() == 94500, "Функция apply_discount работает неправильно"
+
+
+def instantiate_from_csv_test():
+    members = inspect.getmembers(Item)
+    assert len(members) == 5, "Функция instantiate_from_csv работает некорректно"
+
+def string_to_number_test():
+    num = '5'
+    assert type(Item.string_to_number(num)) == int, "Функция string_to_number работает некорректно"
 
 
 total_price_test()

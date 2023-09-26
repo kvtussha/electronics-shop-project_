@@ -38,28 +38,18 @@ class Item:
         self.price = round(self.price * Item.pay_rate)
         return self.price
 
-    # @classmethod
-    # def instantiate_from_csv(cls):
-    #     l = []
-    #     with open('items.csv', encoding='utf-8') as f:
-    #         dict_reader = csv.DictReader(f)
-    #         for row in dict_reader:
-    #             name, price, quantity = row['name'], row['price'], row['quantity']
-    #             cls.__new__(object)
-    #     # return cls(name, price, quantity)
-    #     return cls.__new__(object)
-
     @classmethod
-    def instantiate_from_csv(cls, *args, **kwargs):
-        l = []
-
-        with open('items.csv', encoding='utf-8') as f:
+    def instantiate_from_csv(cls):
+        """
+        Метод считывает данные из "items.csv" и инициализирует экземпляры класса со значениями из файла
+        :return: итоговая цена
+        """
+        with open('../src/items.csv', encoding='utf-8') as f:
             dict_reader = csv.DictReader(f)
             for row in dict_reader:
-                instance = object.__new__(cls, *args, **row)
-                l.append(instance)
-            return l
-
+                name, price, quantity = row['name'], row['price'], row['quantity']
+                cls(name, price, quantity)
+        return "Инициализация экземпляров класса прошла успешно!"
 
     @staticmethod
     def string_to_number(num):
@@ -68,5 +58,6 @@ class Item:
         :return: преобразованное число
         """
         return int(num)
+
 
 print(Item.instantiate_from_csv())
