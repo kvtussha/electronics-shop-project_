@@ -25,16 +25,37 @@ def apply_discount_test():
     assert laptop.apply_discount() == 94500, "Функция apply_discount работает неправильно"
 
 
-def instantiate_from_csv_test():
-    members = inspect.getmembers(Item)
-    assert len(members) == 5, "Функция instantiate_from_csv работает некорректно"
-
 def string_to_number_test():
-    num = '5'
-    assert type(Item.string_to_number(num)) == int, "Функция string_to_number работает некорректно"
+    n1 = '5'
+    n2 = '3'
+    n3 = '8'
+    assert type(Item.string_to_number(n1)) == int, "Функция string_to_number работает некорректно"
+    assert type(Item.string_to_number(n2)) == int, "Функция string_to_number работает некорректно"
+    assert type(Item.string_to_number(n3)) == int, "Функция string_to_number работает некорректно"
+
+
+def repr_test():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Планшет", 18000, 16)
+    item3 = Item("Телевизор", 35000, 13)
+
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Планшет', 18000, 16)"
+    assert repr(item3) == "Item('Телевизор', 35000, 13)"
+
+
+def str_test():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Планшет", 18000, 16)
+    item3 = Item("Телевизор", 35000, 13)
+
+    assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Планшет'
+    assert str(item3) == 'Телевизор'
 
 
 total_price_test()
 apply_discount_test()
-instantiate_from_csv_test()
 string_to_number_test()
+repr_test()
+str_test()

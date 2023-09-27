@@ -12,6 +12,12 @@ class Item:
 
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return str(self.__name)
+
     @property
     def name(self):
         return self.__name
@@ -49,6 +55,7 @@ class Item:
             for row in dict_reader:
                 name, price, quantity = row['name'], row['price'], row['quantity']
                 cls(name, price, quantity)
+                # cls.c
         return "Инициализация экземпляров класса прошла успешно!"
 
     @staticmethod
@@ -58,6 +65,3 @@ class Item:
         :return: преобразованное число
         """
         return int(num)
-
-
-print(Item.instantiate_from_csv())
