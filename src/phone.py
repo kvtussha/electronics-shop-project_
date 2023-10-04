@@ -7,12 +7,5 @@ class Phone(Item):
         self.sim_num = sim_num
 
     def __repr__(self):
-        s = list(super().__repr__())
-        s.insert(28, f', {self.sim_num}')
-        return "".join(s)
-
-    def __add__(self, other):
-        if issubclass(other, Phone):
-            if isinstance(self, Item):
-                all_q = Item(self.name, self.price, self.quantity + self.sim_num)
-                return all_q
+        s = super().__repr__()
+        return s.replace(')', ', ') + f'{self.sim_num})'
