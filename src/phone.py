@@ -2,9 +2,20 @@ from src.item import Item
 
 
 class Phone(Item):
-    def __init__(self, name, price, quantity, sim_num):
+    def __init__(self, name, price, quantity, _sim_num):
         super().__init__(name, price, quantity)
-        self.sim_num = sim_num
+        self._sim_num = _sim_num
+
+    @property
+    def sim_num(self):
+        return self._sim_num
+
+    @sim_num.setter
+    def sim_num(self, value):
+        self._sim_num = value
+        if value <= 0:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+
 
     def __repr__(self):
         s = super().__repr__()
