@@ -12,10 +12,11 @@ class Phone(Item):
 
     @sim_num.setter
     def sim_num(self, value):
-        self._sim_num = value
         if value <= 0:
+            self._sim_num = value
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
-
+        else:
+            self._sim_num = value
 
     def __repr__(self):
         s = super().__repr__()
