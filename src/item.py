@@ -59,8 +59,7 @@ class Item:
             for row in dict_reader:
                 name, price, quantity = row['name'], row['price'], row['quantity']
                 cls(name, price, quantity)
-                # cls.c
-        return "Инициализация экземпляров класса прошла успешно!"
+                return "Инициализация экземпляров класса прошла успешно!"
 
     @staticmethod
     def string_to_number(num):
