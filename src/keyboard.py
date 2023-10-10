@@ -4,27 +4,28 @@ from src.item import Item
 class MixinMode:
 
     def __init__(self):
-        self.language = 'EN'
+        self._langs = {"EN": "EN", "RU": "RU"}
+        self._language = "EN"
 
     @property
     def language(self):
-        return self.language
+        return self._language
 
     @language.setter
     def language(self, mode):
-        if mode in ['RU', 'EN']:
-            if self.language == 'RU':
-                self.language = 'EN'
-            else:
-                self.language = 'RU'
+        if mode in self._langs:
+            self._language = self._langs[mode]
+        else:
+            raise ValueError("Язык не поддерживается")
 
-    def change_lang(self):
-        if self.language == 'EN':
-            self.language = 'RU'
-        elif self.language == 'RU':
-            self.language = 'EN'
+    # def change_lang(self, mode):
+    #     if mode in self._langs:
+    #         self._language = self._langs[mode]
+    #     else:
+    #         raise ValueError("Язык не поддерживается")
 
 
 class Keyboard(Item, MixinMode):
     def __init__(self, name, price, quantity):
         super().__init__(name, price, quantity)
+        MixinMode.__init__(self)
