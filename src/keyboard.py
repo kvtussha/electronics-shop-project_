@@ -11,18 +11,11 @@ class MixinMode:
     def language(self):
         return self._language
 
-    @language.setter
-    def language(self, mode):
+    def change_lang(self, mode):
         if mode in self._langs:
             self._language = self._langs[mode]
         else:
             raise ValueError("Язык не поддерживается")
-
-    # def change_lang(self, mode):
-    #     if mode in self._langs:
-    #         self._language = self._langs[mode]
-    #     else:
-    #         raise ValueError("Язык не поддерживается")
 
 
 class Keyboard(Item, MixinMode):
