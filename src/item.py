@@ -1,5 +1,7 @@
 import csv
 
+from src.my_error import InstantiateCSVError
+
 
 class Item:
     pay_rate = 0
@@ -54,12 +56,19 @@ class Item:
         Метод считывает данные из "items.csv" и инициализирует экземпляры класса со значениями из файла
         :return: итоговая цена
         """
-        with open('../src/items.csv', encoding='utf-8') as f:
-            dict_reader = csv.DictReader(f)
-            for row in dict_reader:
-                name, price, quantity = row['name'], row['price'], row['quantity']
-                cls(name, price, quantity)
-                return "Инициализация экземпляров класса прошла успешно!"
+        try:
+            with open('../src/items.csv', encoding='utf-8') as f:
+                dict_reader = csv.DictReader(f)
+                try:
+                    for row in dict_reader:
+                        name, price, quantity = row['name'], row['price'], row['quantity']
+                        cls(name, price, quantity)
+                except Exception:
+                    raise InstantiateCSVError()
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        else:
+            return "Инициализация экземпляров класса прошла успешно!"
 
     @staticmethod
     def string_to_number(num):
