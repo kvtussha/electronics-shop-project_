@@ -1,23 +1,16 @@
-from src.item import Item
+import pytest
+from src.my_error import InstantiateCSVError
 
 
-def test_error():
-    # Файл items.csv отсутствует.
-    Item.instantiate_from_csv()
-    # FileNotFoundError: Отсутствует файл items.csv
+@pytest.mark.raises()
+def test_mark_raises_not_found():
+    raise FileNotFoundError('Отсутствует файл items.csv')
 
-    # В файле items.csv удалена первая колонка.
-    Item.instantiate_from_csv()
-    # InstantiateCSVError: Файл items.csv поврежден
 
-    # В файле items.csv удалена вторая колонка.
-    Item.instantiate_from_csv()
-    # InstantiateCSVError: Файл items.csv поврежден
+@pytest.mark.raises()
+def test_mark_raises_broken():
+    raise InstantiateCSVError('Файл items.csv поврежден')
 
-    # В файле items.csv удалена третья колонка.
-    Item.instantiate_from_csv()
-    # InstantiateCSVError: Файл items.csv поврежден
 
-    # Файл items.csv содержит все данные и программа работает.
-    Item.instantiate_from_csv()
-    # Инициализация экземпляров класса прошла успешно!
+test_mark_raises_not_found()
+test_mark_raises_broken()

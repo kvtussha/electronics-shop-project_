@@ -51,7 +51,7 @@ class Item:
         return self.price
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, path='../src/items.csv'):
         """
         Метод считывает данные из "items.csv" и инициализирует экземпляры класса со значениями из файла
         :return: итоговая цена
