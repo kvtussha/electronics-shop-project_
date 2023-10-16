@@ -57,7 +57,7 @@ class Item:
         :return: итоговая цена
         """
         try:
-            with open('../src/items.csv', encoding='utf-8') as f:
+            with open(path, encoding='utf-8') as f:
                 dict_reader = csv.DictReader(f)
                 try:
                     for row in dict_reader:
