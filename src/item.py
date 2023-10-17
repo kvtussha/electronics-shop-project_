@@ -1,6 +1,6 @@
 import csv
 
-from src.my_error import InstantiateCSVError
+from src.my_error.my_error import InstantiateCSVError
 
 
 class Item:

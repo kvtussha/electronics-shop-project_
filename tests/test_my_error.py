@@ -1,15 +1,16 @@
 import pytest
-from src.my_error import InstantiateCSVError
+
+from src.item import Item
 
 
 @pytest.mark.raises()
 def test_mark_raises_not_found():
-    raise FileNotFoundError('Отсутствует файл items.csv')
+    Item.instantiate_from_csv('../src/itemsssss.csv')
 
 
 @pytest.mark.raises()
 def test_mark_raises_broken():
-    raise InstantiateCSVError('Файл items.csv поврежден')
+    Item.instantiate_from_csv('../src/my_error/item_wrong.csv')
 
 
 test_mark_raises_not_found()
